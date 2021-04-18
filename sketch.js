@@ -35,6 +35,13 @@ function checkWinner() {
         }      
     }
 
+    //Diagonal
+    if  (board[0][0] == board[1][1] == board[2][2]){
+        winner = board[0][0];
+    }
+    if  (board[2][0] == board[1][1] == board[0][2]){
+        winner = board[2][0];
+    }      
 
     if (available.length == 0) {
         console.log("tie");
