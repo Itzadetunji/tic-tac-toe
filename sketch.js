@@ -24,7 +24,7 @@ function nextTurn(){
     let i = spot[0];
     let j = spot [1];
     console.log(i,j);
-    board[i][j] = currentPlayer;
+    board[i][j] = players[currentPlayer];
     currentPlayer = floor(random(players.length));
 }
 
