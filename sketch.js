@@ -25,7 +25,7 @@ function nextTurn(){
     let j = spot [1];
     console.log(i,j);
     board[i][j] = players[currentPlayer];
-    currentPlayer = floor(random(players.length));
+    currentPlayer = (currentPlayer + 1) % players.length;
 }
 
 function mousePressed(){
