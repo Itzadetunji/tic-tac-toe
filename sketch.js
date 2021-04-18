@@ -48,10 +48,10 @@ function draw(){
             let spot = board[i][j];
             textSize(32);
             strokeWeight(4);
-            if  (spot == player[1]) {
+            if  (spot == players[1]) {
                 noFill();
                 ellipse(x,y,w/2);
-            } else if (spot == player[0]){
+            } else if (spot == players[0]){
                 let xr = w/4;
                 line(x-xr, y-xr, x + xr, y + xr);
                 line(x+xr, y-xr, x-xr, y + xr);
