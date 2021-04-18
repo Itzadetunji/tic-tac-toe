@@ -27,6 +27,10 @@ function nextTurn(){
     currentPlayer = random(players);
 }
 
+function mousePressed(){
+    next
+}
+
 function draw(){
     background(255);
     let w = width / 3;
