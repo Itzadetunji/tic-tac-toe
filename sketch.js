@@ -24,7 +24,7 @@ function nextTurn(){
     let i = spot[0];
     let j = spot [1];
     board[i][j] = currentPlayer;
-    currentPlayer
+    currentPlayer = random(players);
 }
 
 function draw(){
