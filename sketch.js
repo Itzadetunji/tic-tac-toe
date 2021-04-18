@@ -19,6 +19,23 @@ function setup(){
 }
 
 function checkWinner() {
+    let winner = null;
+
+    //Horizontal
+    for (let i = 0; i < 3; i++) {
+        if  (board[i][0] == board[i][1] == board[i][2]){
+            winner = board[i][0];
+        }      
+    }
+
+    //Vertical
+    for (let i = 0; i < 3; i++) {
+        if  (board[0][i] == board[0][i] == board[0][i]){
+            winner = board[0][i];
+        }      
+    }
+
+
     if (available.length == 0) {
         console.log("tie");
     }
@@ -28,7 +45,7 @@ function nextTurn(){
     let index = floor(random(available.length));
     let spot = available.splice(index,1)[0];
     let i = spot[0];
-    let j = spot [1];
+    let j = spot[1];
     console.log(i,j);
     board[i][j] = players[currentPlayer];
     currentPlayer = (currentPlayer + 1) % players.length;
