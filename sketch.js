@@ -18,6 +18,12 @@ function setup(){
     }
 }
 
+function checkWinner() {
+    if (available.length == 0) {
+        console.log("tie");
+    }
+}
+
 function nextTurn(){
     let index = floor(random(available.length));
     let spot = available.splice(index,1)[0];
@@ -62,4 +68,5 @@ function draw(){
         
     }
     nextTurn();
+    checkWinner();
 }
