@@ -28,7 +28,7 @@ function nextTurn(){
 }
 
 function mousePressed(){
-    next
+    nextTurn;
 }
 
 function draw(){
