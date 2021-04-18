@@ -20,7 +20,7 @@ function setup(){
 
 function nextTurn(){
     let index = floor(random(available.length));
-    let spot = available.splice(index,1);
+    let spot = available.splice(index,1)[0];
     let i = spot[0];
     let j = spot [1];
     board[i][j] = currentPlayer;
