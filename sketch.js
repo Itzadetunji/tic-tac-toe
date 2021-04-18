@@ -43,8 +43,10 @@ function checkWinner() {
         winner = board[2][0];
     }      
 
-    if (available.length == 0) {
+    if (winner == null && available.length == 0) {
         console.log("tie");
+    }else{
+        console.log(winner);
     }
 }
 
