@@ -28,9 +28,9 @@ function nextTurn(){
     currentPlayer = (currentPlayer + 1) % players.length;
 }
 
-function mousePressed(){
-    nextTurn();
-}
+// function mousePressed(){
+//     nextTurn();
+// }
 
 function draw(){
     background(255);
@@ -61,4 +61,5 @@ function draw(){
         }
         
     }
+    nextTurn();
 }
