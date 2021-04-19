@@ -19,7 +19,7 @@ function setup(){
 }
 
 function equals3(a,b,c){
-    return (a==b && b==c); 
+    return (a == b && b == c && a != ''); 
 }
 
 function checkWinner() {
@@ -48,9 +48,9 @@ function checkWinner() {
     }      
 
     if (winner == null && available.length == 0) {
-        return "tie";
+        return 'tie';
     }else{
-        return "winner";
+        return winner;
     }
 }
 
