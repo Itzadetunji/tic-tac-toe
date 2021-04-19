@@ -10,6 +10,7 @@ let available = [];
 
 function setup(){
     createCanvas(400, 400);
+    frameRate(1);
     currentPlayer = floor(random(players.length));
     for (let j = 0; j < 3; j++) {
         for (let i = 0; i < 3; i++) {
@@ -56,7 +57,7 @@ function checkWinner() {
 
 function nextTurn(){
     let index = floor(random(available.length));
-    let spot = available.splice(index,1)[0];
+    let spot = available.splice(index, 1)[0];
     let i = spot[0];
     let j = spot[1];
     board[i][j] = players[currentPlayer];
@@ -99,7 +100,8 @@ function draw(){
     let result = checkWinner();
     if(result != null){
         noLoop();
-        console.log(result);
+        createP(result).style('color', '#FFF').style('font-size', '32pt');
+    }else{
+        nextTurn();
     }
-    nextTurn();
 }
