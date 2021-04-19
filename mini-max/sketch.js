@@ -3,20 +3,21 @@ let board = [
     ['','',''],
     ['','','']
 ];
-let players = ['X', 'O'];
 
-let currentPlayer;
-let available = [];
+let ai = 'X';
+let human = 'O'
+let currentPlayer = human;
 
 function setup(){
     createCanvas(400, 400);
-    frameRate(1);
-    currentPlayer = floor(random(players.length));
-    for (let j = 0; j < 3; j++) {
-        for (let i = 0; i < 3; i++) {
-            available.push([i,j]);
-        }
-    }
+    // frameRate(1);
+    // currentPlayer = floor(random(players.length));
+    // for (let j = 0; j < 3; j++) {
+    //     for (let i = 0; i < 3; i++) {
+    //         available.push([i,j]);
+    //     }
+    // }
+    bestMove();
 }
 
 function equals3(a,b,c){
@@ -48,6 +49,15 @@ function checkWinner() {
         winner = board[2][0];
     }      
 
+    let openSpots = 0;
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (board[i][j] == '') {
+                openSpots++;
+            }
+        }
+    }
+
     if (winner == null && available.length == 0) {
         return 'tie';
     }else{
@@ -60,13 +70,23 @@ function nextTurn(){
     let spot = available.splice(index, 1)[0];
     let i = spot[0];
     let j = spot[1];
-    board[i][j] = players[currentPlayer];
-    currentPlayer = (currentPlayer + 1) % players.length;
+    board[i][j] = ai;
+    currentPlayer = (currentPlayer + 1) % currentPlayer;
 }
 
-// function mousePressed(){
-//     nextTurn();
-// }
+function mousePressed(){
+    if (currentPlayer == human){
+        //Human make turn
+        let i = floor(mouseX / w);
+        let j = floor(mouseY / h);
+        //If valid turn
+        if (board[i][j] == '') {
+            board[i][j] = human;
+            currentPlayer = ai;
+            bestMove();
+        }
+    }
+}
 
 function draw(){
     background(255);
@@ -86,10 +106,10 @@ function draw(){
             let spot = board[i][j];
             textSize(32);
             let xr = w / 4;
-            if  (spot == players[1]) {
+            if  (spot == ai[1]) {
                 noFill();
                 ellipse(x, y, xr*2);
-            } else if (spot == players[0]){
+            } else if (spot == human[0]){
                 line(x-xr, y-xr, x + xr, y + xr);
                 line(x+xr, y-xr, x - xr, y + xr);
             }
