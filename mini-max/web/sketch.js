@@ -1,4 +1,4 @@
-let board = [
+let game = [
     ['', '', ''],
     ['', 'X', ''],
     ['', '', '']
@@ -7,9 +7,9 @@ let board = [
   let w; // = width / 3;
   let h; // = height / 3;
   
-  let ai = 'X';
-  let human = 'O';
-  let currentPlayer = human;
+  let computer = 'X';
+  let player = 'O';
+  let currentPlayer = player;
   
   function setup() {
     createCanvas(400, 400);
@@ -18,60 +18,60 @@ let board = [
     // bestMove();
   }
   
-  function equals3(a, b, c) {
+  function matching3(a, b, c) {
     return a == b && b == c && a != '';
   }
   
-  function checkWinner() {
-    let winner = null;
+  function confirmchampion() {
+    let champion = null;
   
     // horizontal
     for (let i = 0; i < 3; i++) {
-      if (equals3(board[i][0], board[i][1], board[i][2])) {
-        winner = board[i][0];
+      if (matching3(game[i][0], game[i][1], game[i][2])) {
+        champion = game[i][0];
       }
     }
   
     // Vertical
     for (let i = 0; i < 3; i++) {
-      if (equals3(board[0][i], board[1][i], board[2][i])) {
-        winner = board[0][i];
+      if (matching3(game[0][i], game[1][i], game[2][i])) {
+        champion = game[0][i];
       }
     }
   
     // Diagonal
-    if (equals3(board[0][0], board[1][1], board[2][2])) {
-      winner = board[0][0];
+    if (matching3(game[0][0], game[1][1], game[2][2])) {
+      champion = game[0][0];
     }
-    if (equals3(board[2][0], board[1][1], board[0][2])) {
-      winner = board[2][0];
+    if (matching3(game[2][0], game[1][1], game[0][2])) {
+      champion = game[2][0];
     }
   
-    let openSpots = 0;
+    let availableSpots = 0;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
-        if (board[i][j] == '') {
-          openSpots++;
+        if (game[i][j] == '') {
+          availableSpots++;
         }
       }
     }
   
-    if (winner == null && openSpots == 0) {
+    if (champion == null && availableSpots == 0) {
       return 'tie';
     } else {
-      return winner;
+      return champion;
     }
   }
   
-  function mousePressed() {
-    if (currentPlayer == human) {
-      // Human make turn
+  function mouseClicked() {
+    if (currentPlayer == player) {
+      // It's players turn
       let i = floor(mouseX / w);
       let j = floor(mouseY / h);
       // If valid turn
-      if (board[i][j] == '') {
-        board[i][j] = human;
-        currentPlayer = ai;
+      if (game[i][j] == '') {
+        game[i][j] = player;
+        currentPlayer = computer;
         bestMove();
       }
     }
@@ -90,28 +90,37 @@ let board = [
       for (let i = 0; i < 3; i++) {
         let x = w * i + w / 2;
         let y = h * j + h / 2;
-        let spot = board[i][j];
+        let spot = game[i][j];
         textSize(32);
         let r = w / 4;
-        if (spot == human) {
+        if (spot == player) {
           noFill();
           ellipse(x, y, r * 2);
-        } else if (spot == ai) {
+        } else if (spot == computer) {
           line(x - r, y - r, x + r, y + r);
           line(x + r, y - r, x - r, y + r);
         }
       }
     }
   
-    let result = checkWinner();
+    let result = confirmchampion();
     if (result != null) {
       noLoop();
-      let resultP = createP('');
-      resultP.style('font-size', '32pt');
+      let gameResult = createP('');
+      gameResult.style('font-size', '40pt');
       if (result == 'tie') {
-        resultP.html('Tie!');
+        gameResult.html('Its a Tie!');;
       } else {
-        resultP.html(`${result} wins!`);
+        gameResult.html(`Better luck next time, ${result} wins!`);
       }
     }
+  }
+
+  function restartGamefromModal(){
+    window.location="index.html";
+  }
+
+  function restartGamefromDraw(){
+    alert("Do you want to restart your game");
+    window.location="index.html";
   }

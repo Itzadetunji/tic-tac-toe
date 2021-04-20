@@ -1,14 +1,14 @@
 function bestMove() {
-    // AI to make its turn
+    // Computer takes its turn
     let bestScore = -Infinity;
     let move;
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         // Is the spot available?
-        if (board[i][j] == '') {
-          board[i][j] = ai;
-          let score = minimax(board, 0, false);
-          board[i][j] = '';
+        if (game[i][j] == '') {
+          game[i][j] = computer;
+          let score = minimax(game, 0, false);
+          game[i][j] = '';
           if (score > bestScore) {
             bestScore = score;
             move = { i, j };
@@ -16,8 +16,8 @@ function bestMove() {
         }
       }
     }
-    board[move.i][move.j] = ai;
-    currentPlayer = human;
+    game[move.i][move.j] = computer;
+    currentPlayer = player;
   }
   
   let scores = {
@@ -26,8 +26,8 @@ function bestMove() {
     tie: 0
   };
   
-  function minimax(board, depth, isMaximizing) {
-    let result = checkWinner();
+  function minimax(game, depth, isMaximizing) {
+    let result = confirmchampion();
     if (result !== null) {
       return scores[result];
     }
@@ -37,10 +37,10 @@ function bestMove() {
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
           // Is the spot available?
-          if (board[i][j] == '') {
-            board[i][j] = ai;
-            let score = minimax(board, depth + 1, false);
-            board[i][j] = '';
+          if (game[i][j] == '') {
+            game[i][j] = computer;
+            let score = minimax(game, depth + 1, false);
+            game[i][j] = '';
             bestScore = max(score, bestScore);
           }
         }
@@ -51,10 +51,10 @@ function bestMove() {
       for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 3; j++) {
           // Is the spot available?
-          if (board[i][j] == '') {
-            board[i][j] = human;
-            let score = minimax(board, depth + 1, true);
-            board[i][j] = '';
+          if (game[i][j] == '') {
+            game[i][j] = player;
+            let score = minimax(game, depth + 1, true);
+            game[i][j] = '';
             bestScore = min(score, bestScore);
           }
         }

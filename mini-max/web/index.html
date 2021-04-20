@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
@@ -11,14 +7,92 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                }
+            .modal {
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            display: none;
+            position: fixed;
+            z-index: 1;
+            padding-top: 100px;
+            }
+
+            .modal-content {
+            border: 1px solid #888;
+            width: 80%;
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            }
+
+            .close {
+            font-size: 28px;
+            font-weight: bold;    
+            color: #aaaaaa;
+            float: right;
+            }
+
+            .close:hover,
+            .close:focus {
+            text-decoration: none;
+            cursor: pointer;
+            color: #000;
+            }
+        </style>
     </head>
     <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-        
+        <button id="myBtn">Restart Game</button>
+        <div id="myModal" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>Do you want to restart the game ?</p>
+              <button onclick="restartGamefromModal()">Yes</button>
+              <button id="closeBtn">No</button>
+            </div>
+          
+          </div>
         <script src="p5.min.js"></script>
         <script src="minimax.js"></script>
         <script src="sketch.js"></script>
+        <script>
+            // Get the modal
+            var modal = document.getElementById("myModal");
+            
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn");
+            var closeBtn = document.getElementById("closeBtn");
+            
+            // Get the <span> element that closes the modal
+            var span = document.getElementsByClassName("close")[0];
+            
+            // If the user click on the button, display the modal
+            btn.onclick = function() {
+              modal.style.display = "block";
+            }
+            
+            // If user click on the element (x) close it.
+            span.onclick = function() {
+              modal.style.display = "none";
+            }
+            closeBtn.onclick = function() {
+              modal.style.display = "none";
+            }
+            
+            // If user clicks outside the modal, close it.
+            window.onclick = function(event) {
+              if (event.target == modal) {
+                modal.style.display = "none";
+              }
+            }
+            </script>
     </body>
 </html>
